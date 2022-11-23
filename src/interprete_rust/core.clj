@@ -1,7 +1,12 @@
 (ns interprete-rust.core
-  (:gen-class))
+  ; (:require [interprete-rust.interprete :as interprete])
+  (:gen-class)
+)
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  (println "Hello, World!")
+  ; (interprete/driver-loop)
+)
+
+
