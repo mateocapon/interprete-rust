@@ -5,3 +5,8 @@
 ```shell
 lein run
 ```
+
+
+```shell
+lein test
+```

@@ -4,4 +4,11 @@
 
 (deftest listar-test
   (testing "LISTAR"
-    (is (= (string_imprimir (list 'a 'b)) (str ""))))
+    (is (= 
+          (string_imprimir (list 'fn 'main (symbol "(") (symbol ")")
+                                 (symbol "{") 'println! (symbol "(") 
+                                 "Hola, mundo!" (symbol ")") (symbol "}")))
+          (str "fn main ( ) {\n"
+               "  println! ( Hola, mundo! )\n"
+               "}\n ")
+))))  
