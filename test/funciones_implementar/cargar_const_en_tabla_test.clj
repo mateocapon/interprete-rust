@@ -28,7 +28,7 @@
 ))))
 
 
-(deftest cargar-const-en-tabla-test-1
+(deftest cargar-const-en-tabla-test-2
   (testing "CONST-EN-TABLA 2"
     (is (= 
           (cargar-const-en-tabla [

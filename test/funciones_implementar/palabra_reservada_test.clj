@@ -7,7 +7,7 @@
     (is (palabra-reservada? 'while)
 )))
 
-(deftest palabra-reservada-test-3
+(deftest palabra-reservada-test-2
   (testing "PALABRA RESERVADA 2"
     (is (not (palabra-reservada? 'bool))
 )))

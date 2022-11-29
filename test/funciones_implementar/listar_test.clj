@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [interprete-rust.funciones-implementar.listar :refer :all]))
 
-(deftest listar-test-2
+(deftest listar-test-1
   (testing "LISTAR-1"
     (is (= 
           (string_imprimir (list 'fn 'main (symbol "(") (symbol ")")
@@ -13,7 +13,7 @@
                "}\n")
 ))))  
 
-(deftest listar-test-1
+(deftest listar-test-2
   (testing "LISTAR-2"
     (is (= 
           (string_imprimir (list 'fn 'main (symbol "(") (symbol ")") 
