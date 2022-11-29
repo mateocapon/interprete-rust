@@ -1,8 +1,9 @@
 (ns interprete-rust.funciones-implementar.pasar-a-int)
 
-
-(defn vec-pasar-a-int [elemento]
-  (if )
+(defn string-a-int [elemento]
+  (let [entero (read-string elemento)]
+    (if (or (float? entero) (integer? entero)) (int entero) elemento)
+  )  
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -20,11 +21,9 @@
 ; [10.0]
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn pasar-a-int [elemento]
-  (cond 
-    (float? elemento) (float elemento)
-    (and (sequential? elemento) (= (count elemento) 1) (vec-pasar-a-int elemento)
-    (float? elemento) (float elemento)
-    (float? elemento) (float elemento)
+  (cond
+    (float? elemento) (int elemento)
+    (string? elemento) (string-a-int elemento)
     :else elemento
   )
 )
