@@ -1,4 +1,39 @@
-(ns interprete-rust.funciones-implementar.generar-ref)
+(ns interprete-rust.funciones-implementar.generar-ref
+  (:require [interprete-rust.funciones-implementar.identificador :refer [identificador?]])
+)
+
+(defn bytecode [amb]
+  (amb 6)
+)
+
+(defn estado [amb]
+  (amb 3)
+)
+
+(defn generar 
+  ([amb instr]
+    (if (= (estado amb) :sin-errores)
+        (assoc amb 6 (conj (bytecode amb) instr))
+        amb))
+  ([amb instr val]
+    (if (= (estado amb) :sin-errores)
+        (assoc amb 6 (conj (bytecode amb) [instr val]))
+        amb))
+)
+
+
+(defn obtener-ult-identificador [simb-ya-parseados]
+  (last (filter identificador? simb-ya-parseados))
+)
+
+
+(defn es-igual-simbolo [simbolo simbolo-contexto]
+  (= simbolo (first simbolo-contexto))
+)
+
+(defn obtener-direccion [simbolo contexto]
+  (last (last (filter (partial es-igual-simbolo simbolo)(second contexto))))
+)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -15,14 +50,13 @@
 ;                                                                                                                           ^  ^^^^^^^^^^^^                                                                    ^^^^^^^^^^^^^^^^^                                                                               ^^^^^^^^^^^^
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn generar-ref [ambiente]
-  ; (let [contexto (nth ambiente 4),
-  ;       estado (nth ambiente 3),
-  ;       simb-ya-parseados (nth ambiente 2)]
+  (let [contexto (nth ambiente 4),
+        estado (nth ambiente 3),
+        simb-ya-parseados (nth ambiente 2)]
 
-  ;   (if (= estado ':sin-errores)
-  ;   ; Hacer algo
-  ;    (assoc ambiente 4 (actualizar-contexto contexto simb-ya-parseados))
-  ;    ambiente
-  ;   )
-  ; )
+    (if (= estado ':sin-errores)
+     (generar ambiente 'PUSHADDR (obtener-direccion (obtener-ult-identificador simb-ya-parseados) contexto))
+     ambiente
+    )
+  )
 )
