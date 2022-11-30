@@ -2,6 +2,8 @@
   (:require [interprete-rust.funciones-implementar.identificador :refer [identificador?]])
 )
 
+
+; Estas tres funciones estan copiadas del interprete.
 (defn bytecode [amb]
   (amb 6)
 )
