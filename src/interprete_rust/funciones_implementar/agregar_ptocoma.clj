@@ -13,6 +13,7 @@
 (defn no-hay-que-agregar-pto-coma? [izq der]
   (or (= (first (first der)) (symbol ";")) 
       (= (first (first der)) (symbol "}")) 
+      (= (first (first der)) (symbol ")")) 
       (es-fin-funcion? (second izq))
       (= (first (first der)) 'else)
   )

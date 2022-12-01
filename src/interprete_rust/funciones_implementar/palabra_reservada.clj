@@ -19,7 +19,9 @@
      'mut 'pub 'ref 'return 'self 'Self 'static 'struct 'super 
      'trait 'true 'type 'unsafe 'use 'where 'while 'async 'await 
      'dyn 'abstract 'become 'box 'do 'final 'macro 'override 'priv 
-     'typeof 'unsized 'virtual 'yield 'try 'union 'io} 
+     'typeof 'unsized 'virtual 'yield 'try 'union 'io 'process}
+     ; Agrego las ultimas dos io y process porque las incluye en use y
+     ; no las esta tomando bien 
     elemento
   )
 )
