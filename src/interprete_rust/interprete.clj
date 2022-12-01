@@ -1886,8 +1886,8 @@
           ;          (if (nil? res) res (recur cod regs-de-act (inc cont-prg) res mapa-regs)))
 
           ; ; MUL: Como ADD, pero multiplica.
-          ; MUL (let [res (aplicar-operador-diadico * pila)]
-          ;          (if (nil? res) res (recur cod regs-de-act (inc cont-prg) res mapa-regs)))
+          MUL (let [res (aplicar-operador-diadico * pila)]
+                   (if (nil? res) res (recur cod regs-de-act (inc cont-prg) res mapa-regs)))
 
           ; ; DIV: Como ADD, pero divide.
           ; DIV (let [res (aplicar-operador-diadico dividir pila)]
@@ -1900,38 +1900,33 @@
 
           ; PUSHFI: PUSH FROM INSTRUCTION. Direccionamiento inmediato. 
           ; Incrementa cont-prg en 1 y agrega al final de pila el valor del argumento.
-          PUSHFI (do (println cod 
-                        regs-de-act 
-                        (inc cont-prg) 
-                        (vec (conj pila (second fetched)))
-                        mapa-regs) 
-                      (recur cod 
+          PUSHFI (recur cod 
                         regs-de-act 
                         (inc cont-prg) 
                         (vec (conj pila (second fetched)))
                         mapa-regs
-                 ))
+                 )
 
           ; PUSHFM: PUSH FROM MEMORY. Direccionamiento directo. Incrementa cont-prg en 1 y agrega al final de pila el elemento ubicado en la posicion de reg-actual indicada por el valor del argumento.
           
 
           ; JMP: Salto incondicional. Cambia cont-prg por el valor del argumento.
-          ; JMP (recur cod 
-          ;           regs-de-act 
-          ;           (second fetched)
-          ;           pila
-          ;           mapa-regs
-          ;    )
+          JMP (recur cod 
+                    regs-de-act 
+                    (second fetched)
+                    pila
+                    mapa-regs
+             )
 
           ; JC: Salto condicional. Quita el ultimo valor de la pila. 
           ; Si este es true, cambia cont-prg por el valor del argumento. 
           ; Si no, incrementa cont-prg en 1.
-          ; JC (recur cod 
-          ;           regs-de-act 
-          ;           (if (last pila) (second fetched) (inc cont-prg))
-          ;           (vec (butlast pila))
-          ;           mapa-regs
-          ;    )
+          JC (recur cod 
+                    regs-de-act 
+                    (if (last pila) (second fetched) (inc cont-prg))
+                    (vec (butlast pila))
+                    mapa-regs
+             )
 
 
           ; CAL: Llamada a una funcion. Agrega al final de regs-de-act el reg-de-act 
@@ -1939,13 +1934,13 @@
           ; el valor del argumento y coloca al final de la pila la direccion de retorno 
           ; (el valor del argumento incrementado en 1).
           CAL (let [ argumento (second fetched),
-                     registro-agregar (mapa-regs argumento)]
+                     registro-agregar (mapa-regs argumento)] 
                    (recur cod 
                           (conj regs-de-act registro-agregar) 
                           argumento 
-                          (vec (conj pila (inc argumento)))
+                          (vec (conj pila (inc cont-prg)))
                           mapa-regs
-                   ) 
+                   )
               )
 
           ; RETN: Indica el retorno de la llamada a un procedimiento (no funcion).
@@ -1954,16 +1949,16 @@
           ; (pasa a ser el ultimo valor en la pila) y 
           ; pila (se quita de ella el nuevo cont-prg).
           RETN (recur cod 
-                    (pop regs-de-act)
-                    (last pila)
-                    (pop pila)
-                    mapa-regs
+                      (vec (butlast regs-de-act))
+                      (last pila)
+                      (vec (butlast pila))
+                      mapa-regs
                )
 
 
 
           ; NL: New line. Imprime un salto de linea e incrementa cont-prg en 1.
-          NL (do (println "") (println cod regs-de-act (inc cont-prg) pila mapa-regs) (recur cod regs-de-act (inc cont-prg) pila mapa-regs))
+          NL (do (println "") (recur cod regs-de-act (inc cont-prg) pila mapa-regs))
 
           ; NEG: Incrementa cont-prg en 1, quita de la pila un elemento numerico, 
           ; le cambia el signo y lo coloca al final de la pila.

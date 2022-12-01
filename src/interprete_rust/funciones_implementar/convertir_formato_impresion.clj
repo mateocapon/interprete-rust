@@ -12,11 +12,10 @@
 )
 
 (defn reemplazar-uno [lista_convertir nro_parametro]
-  (do (println lista_convertir) (println nro_parametro)
   (cons 
     (replace-first (first lista_convertir) "{}" 
       (obtener-formato-clj (nth lista_convertir nro_parametro)))
-    (rest lista_convertir)))
+    (rest lista_convertir))
 )
 
 
