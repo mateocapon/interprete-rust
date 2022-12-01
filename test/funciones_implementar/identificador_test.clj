@@ -21,3 +21,8 @@
   (testing "IDENTIFICADOR 4"
     (is (not(identificador? '12e0))
 )))
+
+(deftest identificador-test-4
+  (testing "IDENTIFICADOR 5"
+    (is (not (identificador? 'io))
+)))

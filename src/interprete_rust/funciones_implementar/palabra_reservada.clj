@@ -19,7 +19,7 @@
      'mut 'pub 'ref 'return 'self 'Self 'static 'struct 'super 
      'trait 'true 'type 'unsafe 'use 'where 'while 'async 'await 
      'dyn 'abstract 'become 'box 'do 'final 'macro 'override 'priv 
-     'typeof 'unsized 'virtual 'yield 'try 'union } 
+     'typeof 'unsized 'virtual 'yield 'try 'union 'io} 
     elemento
   )
 )

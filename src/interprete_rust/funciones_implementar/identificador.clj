@@ -35,4 +35,3 @@
          (not= elemento '_) 
          (alfa-numerico? elemento))
 )
-
