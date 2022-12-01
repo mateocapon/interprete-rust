@@ -1,11 +1,31 @@
 (ns interprete-rust.funciones-implementar.convertir-formato-impresion)
+(use '[clojure.string :only (replace-first)])
 
-; (defn convertir-parametro [lista_convertir nro_parametro] 
-;   (assoc lista_convertir 0 
-;          (replace-first (nth lista_convertir 0) 
-;           "{}" 
-;           (obtener-identificador-clj (nth lista_convertir nro_parametro)))
-; )
+(defn obtener-formato-clj [elemento]
+  (cond
+    (string? elemento) "%s"
+    (integer? elemento) "%d"
+    (float? elemento) "%.0f"
+    :else ""
+  )
+
+)
+
+(defn reemplazar-uno [lista_convertir nro_parametro]
+  (do (println lista_convertir) (println nro_parametro)
+  (cons 
+    (replace-first (first lista_convertir) "{}" 
+      (obtener-formato-clj (nth lista_convertir nro_parametro)))
+    (rest lista_convertir)))
+)
+
+
+(defn convertir-parametro [lista_convertir nro_parametro] 
+  (if (= nro_parametro (count lista_convertir))
+      lista_convertir
+      (recur (reemplazar-uno lista_convertir nro_parametro ) (inc nro_parametro))
+  )
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; CONVERTIR-FORMATO-IMPRESION: Recibe una lista con los argumentos de print! de Rust y devuelve una lista con los
@@ -20,6 +40,6 @@
 ; user=> (convertir-formato-impresion '("Las raices cuadradas de {} son +{:.8} y -{:.8}" 4.0 1.999999999985448 1.999999999985448))
 ; ("Las raices cuadradas de %.0f son +%.8f y -%.8f" 4.0 1.999999999985448 1.999999999985448)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defn convertir-formato-impresion []
-
+(defn convertir-formato-impresion [lista_argumentos]
+  (convertir-parametro lista_argumentos 1)
 )

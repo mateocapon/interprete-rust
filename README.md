@@ -12,4 +12,4 @@ lein test
 ```
 
 
-ESCAN rust-ejemplos/main01.rs
+inter rust-ejemplos/main01.rs

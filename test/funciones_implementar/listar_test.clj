@@ -5,18 +5,18 @@
 (deftest listar-test-1
   (testing "LISTAR-1"
     (is (= 
-          (string_imprimir (list 'fn 'main (symbol "(") (symbol ")")
+          (string-imprimir (list 'fn 'main (symbol "(") (symbol ")")
                                  (symbol "{") 'println! (symbol "(") 
                                  "Hola, mundo!" (symbol ")") (symbol "}")))
           (str "fn main ( ) {\n"
-               "  println! ( Hola, mundo! )\n"
+               "  println! ( \"Hola, mundo!\" )\n"
                "}\n")
 ))))  
 
 (deftest listar-test-2
   (testing "LISTAR-2"
     (is (= 
-          (string_imprimir (list 'fn 'main (symbol "(") (symbol ")") 
+          (string-imprimir (list 'fn 'main (symbol "(") (symbol ")") 
                                  (symbol "{") 'if 'x '< '0 (symbol "{") 
                                  'x '= '- 'x (symbol ";") (symbol "}") 
                                  'renglon '= 'x (symbol ";") 'if 'z '< '0 
