@@ -1,15 +1,22 @@
-# interprete-rust
+# Interprete Rust - Mateo Capón Blanquer -104258
 
-## Ejecución
+Materia: Lenguajes Formales
+
+## Ejecución del interprete
 
 ```shell
 lein run
 ```
 
+Ejecutar los ejemplos en el interprete con:
+```shell
+inter rust-ejemplos/main*.rs
+```
+
+## Ejecución de los tests
 
 ```shell
 lein test
 ```
 
 
-inter rust-ejemplos/main01.rs

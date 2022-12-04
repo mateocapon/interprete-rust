@@ -5,7 +5,6 @@
 
 (defn -main
   [& args]
-  (println "Hello, World!")
   (interprete/driver-loop)
 )
 

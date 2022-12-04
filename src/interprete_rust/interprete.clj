@@ -1674,7 +1674,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn interpretar [cod regs-de-act cont-prg pila mapa-regs]
-  (let [fetched (cod cont-prg),
+  (do (println "\n\nEl codigo de programa es: "(cod cont-prg) "\n\n") (let [fetched (cod cont-prg),
         opcode (if (symbol? fetched) fetched (first fetched)),
         reg-actual (last regs-de-act)]
        (case opcode
@@ -1931,7 +1931,7 @@
           ; Si no, incrementa cont-prg en 1.
           JC (recur cod 
                     regs-de-act 
-                    (if (last pila) (second fetched) (inc cont-prg))
+                    (if (true? (last pila)) (second fetched) (inc cont-prg))
                     (vec (butlast pila))
                     mapa-regs
               )
@@ -1975,11 +1975,11 @@
           
 
           ; OR: Como ADD, pero calcula el or entre los dos valores.
-          OR (let [res (aplicar-operador-diadico (quote or) pila)]
+          OR (let [res (aplicar-operador-diadico #(or %1 %2) pila)]
               (if (nil? res) res (recur cod regs-de-act (inc cont-prg) res mapa-regs)))
 
           ; AND: Como ADD, pero calcula el and entre los dos valores.
-          AND (let [res (aplicar-operador-diadico (quote and) pila)]
+          AND (let [res (aplicar-operador-diadico #(and %1 %2) pila)]
               (if (nil? res) res (recur cod regs-de-act (inc cont-prg) res mapa-regs)))
 
 
@@ -2057,11 +2057,11 @@
               )
 
           ; SQRT: Incrementa cont-prg en 1, quita de la pila un elemento numerico, calcula su raiz cuadrada y la coloca al final de la pila.
-          SQRT (let [sqrt (Math/sqrt (last pila))]
+          SQRT (let [res (Math/sqrt (last pila))]
                   (recur cod 
                          regs-de-act 
                          (inc cont-prg) 
-                         (conj (vec (butlast pila)) sqrt) 
+                         (conj (vec (butlast pila)) res) 
                          mapa-regs
                   )
               )
@@ -2115,5 +2115,5 @@
   )
 )
 
-
+)
 true
