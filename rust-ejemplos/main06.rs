@@ -18,7 +18,6 @@ fn raiz_cuadrada_de_positivo(x: f64) -> f64 {
     }
 
     let mut r: f64 = (izq + der) / 2.0;
-    println!("El valor inicial de r es: {}", r);
 
     while f64::abs(x - r * r) > 0.0000000001 {
         if r * r < x {
@@ -28,7 +27,6 @@ fn raiz_cuadrada_de_positivo(x: f64) -> f64 {
         }
 
         r = (izq + der) / 2.0;
-        println!("El valor de r es: {:.8}", r);
     }
 
     r
