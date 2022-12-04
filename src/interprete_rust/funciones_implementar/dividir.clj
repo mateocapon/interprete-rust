@@ -19,7 +19,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn dividir [dividendo divisor]
   (if (or (float? dividendo) (float? divisor))
-    (double (/ dividendo divisor))
+    (/ dividendo divisor)
     (int (/ dividendo divisor))
    )
 )
