@@ -44,3 +44,10 @@
           (dividir 1 2.0)
           0.5
 ))))
+
+(deftest dividir-test-7
+  (testing "DIVIDIR-7"
+    (is (= 
+          (dividir 1.0 2)
+          0.5
+))))

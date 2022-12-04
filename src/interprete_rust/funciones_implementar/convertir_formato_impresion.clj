@@ -11,6 +11,7 @@
   (cond
     (re-matches #"\{:.\d+\}" formato-rust) (str "%." (re-find #"\d+" formato-rust) "f")
     (string? argumento) "%s"
+    (char? argumento) "%c"
     (integer? argumento) "%d"
     (float? argumento) "%.0f"
     :else (throw (Exception. "No matchea ningun tipo."))

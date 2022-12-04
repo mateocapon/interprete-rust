@@ -1674,7 +1674,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn interpretar [cod regs-de-act cont-prg pila mapa-regs]
-  (do (println "\n\nEl codigo de programa es: "(cod cont-prg) "\n\n") (let [fetched (cod cont-prg),
+  (let [fetched (cod cont-prg),
         opcode (if (symbol? fetched) fetched (first fetched)),
         reg-actual (last regs-de-act)]
        (case opcode
@@ -2115,5 +2115,4 @@
   )
 )
 
-)
 true
