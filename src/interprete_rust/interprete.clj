@@ -128,6 +128,7 @@
 (declare generar-print!)
 (declare generar-format!)
 (declare interpretar)
+(declare spy)
 
 (defn driver-loop
    ([]
@@ -2114,5 +2115,10 @@
        )
   )
 )
+
+(defn spy
+   ([x] (do (prn x) x))
+   ([msg x] (do (print msg) (print ": ") (prn x) x)))
+
 
 true
